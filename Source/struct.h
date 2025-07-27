@@ -7,3 +7,4 @@ struct Vector2 {
 struct VectorI2 {
 	int x, y;
 };
+
