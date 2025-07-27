@@ -370,3 +370,5 @@ void DrawExtraLines(double extraAngles[]) {
 		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,80,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
 	}
 }
+
+//check
