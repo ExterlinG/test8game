@@ -10,7 +10,7 @@
 
 
 namespace {
-	Planet planet;
+	Planet planetFunction;
 	enum class PlayStatus {
 		BEFORE_PLAY,
 		IN_PLAY,
@@ -19,7 +19,9 @@ namespace {
 	PlayStatus status;
 	static const int PLANET_MAX = 20;
 	static Planet planets[PLANET_MAX];
-
+	extern Planet planets[PLANET_MAX];
+	extern VectorI2 defaultPos[PLANET_MAX];
+	extern VectorI2 planet[];
 	int galaxy = -1;		//game‚Ì”wŒi‰æ‘œ‚Ìƒnƒ“ƒhƒ‹
 	int groundImage = -1;	//’n–Ê‚Ì‰æ‘œƒnƒ“ƒhƒ‹
 	int lines = -1;
@@ -115,7 +117,7 @@ void PlaySceneInit()
 		playSound = LoadSoundMem("data\\sound\\playSound\\playSound.wav");
 		assert(playSound >= 0);
 	}
-	planet.Init();
+	planetFunction.Init();
 	PlayerInit();
 	walkCounter= 0;
 	//patternLine = 0;
@@ -130,7 +132,7 @@ void PlaySceneInit()
 }
 void PlaySceneUpdate()
 {
-	planet.Update();
+	planetFunction.Update();
 	//patternPlanet = (walkCounter / 6)% 77;
 
 	//walkCounter++;
@@ -171,12 +173,14 @@ void PlaySceneUpdate()
 
 void PlaySceneDraw()
 {
-	
+	for (int i = 0; i < PLANET_MAX; i++) {
+		planets[i].Draw(); // „O„„„‚„y„ƒ„€„r„„r„p„u„} „„|„p„~„u„„„ „y„x planet.cpp
+	}
 
 	//DrawRotaGraph(500, 500,1.0,45,lines,false, false);
 	DrawGraph(0, 0, galaxy, true);
 	DistanceMeter(170, 30);
-	planet.Draw();
+	//planet.Draw();
 
 	//line
 
@@ -280,7 +284,7 @@ void PlaySceneDraw()
 
 void PlaySceneRelease()
 {
-	planet.Release();
+	planetFunction.Release();
 	PlayerRelease();
 
 	if (playSound > 0) {

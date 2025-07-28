@@ -98,7 +98,8 @@ void Planet::Init()
 	//	lines = LoadGraph("data\\texture\\lines\\mylines1.png");
 	//	assert(lines >= 0);
 	//}
-	for (int i = 0; i < PLANET_MAX; i++) {
+	for (int i = 0; i < PLANET_MAX; i++) 
+	{
 
 		planets[i] = Planet(
 
@@ -111,15 +112,17 @@ void Planet::Init()
 		);
 	}
 	//----------------------------------------------
+		//angle
+	Planet::CalculatePlanetAngles(planetAngle);
+	//extra angle
+	Planet::CalculateExtraAngles(extraAngles);
+	//----------------------------------------------
 	patternLine = 0;
 	patternPlanet = 0;
 }
 void Planet::Update() 
 {
-	//angle
-	Planet::CalculatePlanetAngles(planetAngle);
-	//extra angle
-	Planet::CalculateExtraAngles(extraAngles);
+
 
 	// Update logic for the planet can be added here
 }
