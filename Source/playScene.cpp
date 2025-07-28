@@ -6,9 +6,11 @@
 #include "struct.h"
 #include "math.h"
 #include <vector>
+#include "planet.h"
 
 
 namespace {
+	Planet planet;
 	enum class PlayStatus {
 		BEFORE_PLAY,
 		IN_PLAY,
@@ -33,52 +35,52 @@ namespace {
 	//----------------------------------------------
 	
 
-	VectorI2 planet[] = { {689,128},{848, 96},{1008, 128},
-							{1136, 224},{1192, 368},{1096, 509},
-							{1456, 428},{1408, 592},{1280, 720},
-							{1104, 768},{944, 704},{848, 560},
-							{848.5, 911},{704, 800},{624, 640},
-							{655, 464},{785, 352},{960, 336},{960,476} };
-	const int planet_size = sizeof(planet) / sizeof(planet[0]);
-	//----------------------------------------------
-	
+	//VectorI2 planet[] = { {689,128},{848, 96},{1008, 128},
+	//						{1136, 224},{1192, 368},{1096, 509},
+	//						{1456, 428},{1408, 592},{1280, 720},
+	//						{1104, 768},{944, 704},{848, 560},
+	//						{848.5, 911},{704, 800},{624, 640},
+	//						{655, 464},{785, 352},{960, 336},{960,476} };
+	//const int planet_size = sizeof(planet) / sizeof(planet[0]);
+	////----------------------------------------------
+	//
 
-	VectorI2 line[] = { {689,128},{848, 96},{1008, 128},
-						{1136, 224},{1192, 368},{1096, 509},
-						{1456, 428},{1408, 592},{1280, 720},
-						{1104, 768},{944, 704},{848, 560},
-						{848.5, 911},{704, 800},{624, 640},
-						{655, 464},{785, 352},{960, 336},{960,476} };
-	const int line_size = sizeof(line) / sizeof(line[0]);
+	//VectorI2 line[] = { {689,128},{848, 96},{1008, 128},
+	//					{1136, 224},{1192, 368},{1096, 509},
+	//					{1456, 428},{1408, 592},{1280, 720},
+	//					{1104, 768},{944, 704},{848, 560},
+	//					{848.5, 911},{704, 800},{624, 640},
+	//					{655, 464},{785, 352},{960, 336},{960,476} };
+	//const int line_size = sizeof(line) / sizeof(line[0]);
 
-	//----------------------------------------------
-	const std::pair<int, int> extraConnections[] = {
-		{3, 17}, {4, 17}, {5, 18}, {9, 5},
-		{10, 5}, {5, 11}, {11, 17}, {16, 11},
-		{18, 11}, {17, 5},{15, 11}
-	};
+	////----------------------------------------------
+	//const std::pair<int, int> extraConnections[] = {
+	//	{3, 17}, {4, 17}, {5, 18}, {9, 5},
+	//	{10, 5}, {5, 11}, {11, 17}, {16, 11},
+	//	{18, 11}, {17, 5},{15, 11}
+	//};
 
 
 
 	//----------------------------------------------
 	VectorI2 lineToPlanet;
 
-	int patternLine;
-	int patternPlanet;
+	//int patternLine;
+	//int patternPlanet;
 	//----------------------------------------------
-	VectorI2 lineAngle[];
-	double dx;
-	double dy;
+	//VectorI2 lineAngle[];
+	//double dx;
+	//double dy;
 
-	static const float PLANET_CENTER = 48.0;
+	//static const float PLANET_CENTER = 48.0;
 
-	double planetAngle[planet_size];
-	double extraAngles[10];
+	//double planetAngle[planet_size];
+	//double extraAngles[11];
 	//double planetAngle = 1.57f;
 	//double enemyScale = 0.5f;
 
-	double enemyPosX = 848.0f;	//ÉGÉlÉ~Å[ÇÃç¿ïW
-	double enemyPosY = 96.0f;
+	//double enemyPosX = 848.0f;	//ÉGÉlÉ~Å[ÇÃç¿ïW
+	//double enemyPosY = 96.0f;
 
 
 	//debug
@@ -88,18 +90,19 @@ namespace {
 
 void PlaySceneInit()
 {
+	planet.Init();
 	if (galaxy < 0) {
 		galaxy = LoadGraph("data\\texture\\galaxy\\galaxy1.png");
 		assert(galaxy >= 0);
 	}
-	if (lines < 0) {
-		lines = LoadGraph("data\\texture\\lines\\mylines1.png");
-		assert(lines >= 0);
-	}
-	if (groundImage < 0) {
-		groundImage = LoadGraph("data\\texture\\planet\\planet.png");
-		assert(groundImage >= 0);
-	}
+	//if (lines < 0) {
+	//	lines = LoadGraph("data\\texture\\lines\\mylines1.png");
+	//	assert(lines >= 0);
+	//}
+	//if (groundImage < 0) {
+	//	groundImage = LoadGraph("data\\texture\\planet\\planet.png");
+	//	assert(groundImage >= 0);
+	//}
 	if (distanceImage < 0) {
 		distanceImage = LoadGraph("data\\texture\\ui\\num02.png");
 		assert(distanceImage >= 0);
@@ -111,23 +114,23 @@ void PlaySceneInit()
 	
 	PlayerInit();
 	walkCounter= 0;
-	patternLine = 0;
-	patternPlanet = 0;
+	//patternLine = 0;
+	//patternPlanet = 0;
 	
 
-
+	
 	//debug
 	color = GetColor(255, 255, 255);
 
 }
 void PlaySceneUpdate()
 {
-	
-	patternPlanet = (walkCounter / 6)% 77;
+	planet.Update();
+	//patternPlanet = (walkCounter / 6)% 77;
 
-	walkCounter++;
-	lineWalkCounter++;
-	patternLine = (lineWalkCounter / 10) % 6;
+	//walkCounter++;
+	//lineWalkCounter++;
+	//patternLine = (lineWalkCounter / 10) % 6;
 	
 	//if (lineWalkCounter > 60)
 	//{
@@ -138,10 +141,10 @@ void PlaySceneUpdate()
 		//ñ⁄ïWç¿ïWÅiÉvÉåÉCÉÑÅ[ÅjÇ©ÇÁÉGÉlÉ~Å[ÇÃç¿ïWÇÇà¯Ç¢ÇƒÉxÉNÉgÉãdÇãÅÇﬂÇÈ(dx,dy)
 
 	//angle
-	CalculatePlanetAngles(planetAngle);
+	//CalculatePlanetAngles(planetAngle);
 
 	//extra angle
-	CalculateExtraAngles(extraAngles);
+	//CalculateExtraAngles(extraAngles);
 	
 	//for (int i = 0; i < planet_size; i++)
 	//{
@@ -163,7 +166,7 @@ void PlaySceneUpdate()
 
 void PlaySceneDraw()
 {
-
+	planet.Draw();
 
 	//DrawRotaGraph(500, 500,1.0,45,lines,false, false);
 	DrawGraph(0, 0, galaxy, true);
@@ -172,19 +175,23 @@ void PlaySceneDraw()
 
 	//line
 
-	const int LINE_SPRITE_WIDTH = 16;
-	const int LINE_SPRITE_HEIGHT = 80;
-		for (int i = 0; i < line_size; i++)
-		{
-			bool skipLine = (i == 5  || i == 11 || i == 18);
+	//const int LINE_SPRITE_WIDTH = 16;
+	//const int LINE_SPRITE_HEIGHT = 80;
+	//	for (int i = 0; i < line_size; i++)
+	//	{
+	//		bool skipLine = (i == 5  || i == 11 || i == 18);
 
-		
-			if(!skipLine){
-			DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[i], lines, true, false);
-			}
-		}
-	//more center lines ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑu Ñ|ÑyÑ~ÑyÑy.
-		DrawExtraLines(extraAngles);
+	//	
+	//		if(!skipLine){
+	//		DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[i], lines, true, false);
+	//		}
+	//	}
+	// 
+	// 
+	////more center lines ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑu Ñ|ÑyÑ~ÑyÑy.
+	//	DrawExtraLines(extraAngles);
+	// 
+	// 
 		//DrawRectRotaGraph2((line[11].x + PLANET_CENTER), line[11].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[11], lines, true, false);
 	
 		//DrawRectRotaGraph2(848 + PLANET_CENTER, 96 + PLANET_CENTER, patternLine * 16, 112, 80, 16, -48, 0, 1, planetAngle, lines, true, false);//lines red-gray 1
@@ -192,11 +199,13 @@ void PlaySceneDraw()
 
 		//planet position
 
-		for (int i = 0; i < planet_size; i++)
+		//for (int i = 0; i < planet_size; i++)
 
-		{
-			DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
-		}
+		//{
+		//	DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
+		//}
+		// 
+		// 
 		//DrawRectGraph(planet[18].x, planet[18].y, patternPlanet *96, 0, 96, 96, groundImage, true, false); //middle
 		//DrawRectGraph(planet[17].x, planet[17].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false); //grey 15
 		//DrawRectGraph(planet[16].x, planet[16].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false); //grey 14
@@ -251,11 +260,11 @@ void PlaySceneDraw()
 
 		if (DEBUG_FONT) {
 			DrawFormatString(20, 30, color, "EnemyStatus");
-			DrawFormatString(20, 50, color, "PosX %f, PosY %f ", enemyPosX, enemyPosY);
+			//DrawFormatString(20, 50, color, "PosX %f, PosY %f ", enemyPosX, enemyPosY);
 
 			//AngleÇÕäpìxÇ≈ÇÕÇ»Ç≠ÅAÉâÉWÉAÉìÅi1.57ÅÅ90ìxÅjÇ≈ï\åªÇ≥ÇÍÇÈ
 			//75çsñ⁄ÇÃíÜêg
-			DrawFormatString(20, 70, color, "Angle %f ", planetAngle);
+			//DrawFormatString(20, 70, color, "Angle %f ", planetAngle);
 
 			//Xç¿ïWÇ∆Yç¿ïWÇ÷ÇÃà⁄ìÆó 
 			//78çsñ⁄ÅA79çsñ⁄ÇÃíÜêg
@@ -266,6 +275,7 @@ void PlaySceneDraw()
 
 void PlaySceneRelease()
 {
+	planet.Release();
 	PlayerRelease();
 
 	if (playSound > 0) {
@@ -311,64 +321,64 @@ void DistanceMeter(int x, int y) {
 	} while (copy > 0);
 }
 
-void CalculatePlanetAngles(double planetAngle[]) {  // first lines Ñ|ÑyÑ~ÑyÑy ÑÉÑrÑëÑxÑçÑrÑpÑêÑãÑyÑu ÑÅÑ|ÑpÑ~ÑuÑÑÑç ÑÅÑÄÑÉÑ|ÑuÑtÑÄÑrÑpÑÑÑuÑ|ÑéÑ~ÑÄ
-	for (int i = 0; i < planet_size; i++) {
-		int next_idx = (i + 1) % planet_size;
-
-		double dx = (planet[i].x + PLANET_CENTER) - (planet[next_idx].x + PLANET_CENTER);
-		double dy = (planet[i].y + PLANET_CENTER) - (planet[next_idx].y + PLANET_CENTER);
-
-
-		planetAngle[i] = atan2(dy, dx);  // atan2 ÑrÑÄÑxÑrÑÇÑpÑãÑpÑuÑÑ double
-	}
-}
+//void CalculatePlanetAngles(double planetAngle[]) {  // first lines Ñ|ÑyÑ~ÑyÑy ÑÉÑrÑëÑxÑçÑrÑpÑêÑãÑyÑu ÑÅÑ|ÑpÑ~ÑuÑÑÑç ÑÅÑÄÑÉÑ|ÑuÑtÑÄÑrÑpÑÑÑuÑ|ÑéÑ~ÑÄ
+//	for (int i = 0; i < planet_size; i++) {
+//		int next_idx = (i + 1) % planet_size;
+//
+//		double dx = (planet[i].x + PLANET_CENTER) - (planet[next_idx].x + PLANET_CENTER);
+//		double dy = (planet[i].y + PLANET_CENTER) - (planet[next_idx].y + PLANET_CENTER);
+//
+//
+//		planetAngle[i] = atan2(dy, dx);  // atan2 ÑrÑÄÑxÑrÑÇÑpÑãÑpÑuÑÑ double
+//	}
+//}
 // more lines ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑu Ñ|ÑyÑ~ÑyÑy
-void CalculateExtraAngles(double extraAngles[]) {
-	// ÑPÑpÑÇÑç ÑÅÑ|ÑpÑ~ÑuÑÑ ÑtÑ|Ñë ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑá ÑÉÑÄÑuÑtÑyÑ~ÑuÑ~ÑyÑz
+//void CalculateExtraAngles(double extraAngles[]) {
+//	// ÑPÑpÑÇÑç ÑÅÑ|ÑpÑ~ÑuÑÑ ÑtÑ|Ñë ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑá ÑÉÑÄÑuÑtÑyÑ~ÑuÑ~ÑyÑz
+//
+//	for (int i = 0; i < 11; i++) {
+//		int idx1 = extraConnections[i].first;
+//		int idx2 = extraConnections[i].second;
+//
+//		double dx = (planet[idx2].x + PLANET_CENTER) - (planet[idx1].x + PLANET_CENTER);
+//		double dy = (planet[idx2].y + PLANET_CENTER) - (planet[idx1].y + PLANET_CENTER);
+//		extraAngles[i] = atan2(dy, dx);
+//	}
+//}
 
-	for (int i = 0; i < 11; i++) {
-		int idx1 = extraConnections[i].first;
-		int idx2 = extraConnections[i].second;
-
-		double dx = (planet[idx2].x + PLANET_CENTER) - (planet[idx1].x + PLANET_CENTER);
-		double dy = (planet[idx2].y + PLANET_CENTER) - (planet[idx1].y + PLANET_CENTER);
-		extraAngles[i] = atan2(dy, dx);
-	}
-}
-
-void DrawExtraLines(double extraAngles[]) {
-	const int LINE_SPRITE_WIDTH = 16;
-	const int LINE_SPRITE_HEIGHT = 80;
-
-	// ÑPÑpÑÇÑç ÑÅÑ|ÑpÑ~ÑuÑÑ ÑtÑ|Ñë ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑá ÑÉÑÄÑuÑtÑyÑ~ÑuÑ~ÑyÑz (ÑÑÑpÑ{ÑyÑu ÑwÑu Ñ{ÑpÑ{ Ñr CalculateExtraAngles)
-			//1. planet[3] Ñy planet[17].
-			//2. planet[4] Ñy planet[17].
-			//3. planet[5] Ñy planet[18].
-			//4. planet[9] Ñy planet[5].
-			//5. planet[10] Ñy planet[5].
-			//6. planet[5] Ñy planet[11].
-			//7. planet[11] Ñy planet[17].
-			//8. planet[16] Ñy planet[11].
-			//9. planet[11] Ñy planet[18].
-			//10. planet[17] Ñy planet[5].
-
-	//const std::pair<int, int> extraConnections[] = {
-	//	{3, 17}, {4, 17}, {5, 18}, {9, 5},
-	//	{10, 5}, {5, 11}, {11, 17}, {16, 11},
-	//	{18, 11}, {17, 5}
-	//};
-
-	for (int i = 0; i < 11; i++) {
-		int idx1 = extraConnections[i].first;
-		int idx2 = extraConnections[i].second;
-
-		// ÑBÑçÑâÑyÑÉÑ|ÑëÑuÑ} ÑÉÑuÑÇÑuÑtÑyÑ~ÑÖ Ñ}ÑuÑwÑtÑÖ ÑÅÑ|ÑpÑ~ÑuÑÑÑpÑ}Ñy
-		int midX = (planet[idx1].x + planet[idx2].x) / 2;
-		int midY = (planet[idx1].y + planet[idx2].y) / 2;
-
-		// ÑOÑÑÑÇÑyÑÉÑÄÑrÑçÑrÑpÑuÑ} ÑpÑ~ÑyÑ}ÑyÑÇÑÄÑrÑpÑ~Ñ~ÑÖÑê Ñ|ÑyÑ~ÑyÑê
-		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,80,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
-	}
-}
+//void DrawExtraLines(double extraAngles[]) {
+//	const int LINE_SPRITE_WIDTH = 16;
+//	const int LINE_SPRITE_HEIGHT = 80;
+//
+//	// ÑPÑpÑÇÑç ÑÅÑ|ÑpÑ~ÑuÑÑ ÑtÑ|Ñë ÑtÑÄÑÅÑÄÑ|Ñ~ÑyÑÑÑuÑ|ÑéÑ~ÑçÑá ÑÉÑÄÑuÑtÑyÑ~ÑuÑ~ÑyÑz (ÑÑÑpÑ{ÑyÑu ÑwÑu Ñ{ÑpÑ{ Ñr CalculateExtraAngles)
+//			//1. planet[3] Ñy planet[17].
+//			//2. planet[4] Ñy planet[17].
+//			//3. planet[5] Ñy planet[18].
+//			//4. planet[9] Ñy planet[5].
+//			//5. planet[10] Ñy planet[5].
+//			//6. planet[5] Ñy planet[11].
+//			//7. planet[11] Ñy planet[17].
+//			//8. planet[16] Ñy planet[11].
+//			//9. planet[11] Ñy planet[18].
+//			//10. planet[17] Ñy planet[5].
+//
+//	//const std::pair<int, int> extraConnections[] = {
+//	//	{3, 17}, {4, 17}, {5, 18}, {9, 5},
+//	//	{10, 5}, {5, 11}, {11, 17}, {16, 11},
+//	//	{18, 11}, {17, 5}
+//	//};
+//
+//	for (int i = 0; i < 11; i++) {
+//		int idx1 = extraConnections[i].first;
+//		int idx2 = extraConnections[i].second;
+//
+//		// ÑBÑçÑâÑyÑÉÑ|ÑëÑuÑ} ÑÉÑuÑÇÑuÑtÑyÑ~ÑÖ Ñ}ÑuÑwÑtÑÖ ÑÅÑ|ÑpÑ~ÑuÑÑÑpÑ}Ñy
+//		int midX = (planet[idx1].x + planet[idx2].x) / 2;
+//		int midY = (planet[idx1].y + planet[idx2].y) / 2;
+//
+//		// ÑOÑÑÑÇÑyÑÉÑÄÑrÑçÑrÑpÑuÑ} ÑpÑ~ÑyÑ}ÑyÑÇÑÄÑrÑpÑ~Ñ~ÑÖÑê Ñ|ÑyÑ~ÑyÑê
+//		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,80,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
+//	}
+//}
 
 //check
