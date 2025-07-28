@@ -17,7 +17,7 @@ namespace {
 		AFTER_PLAY,
 	};
 	PlayStatus status;
-
+	
 	int galaxy = -1;		//gameの背景画像のハンドル
 	int groundImage = -1;	//地面の画像ハンドル
 	int lines = -1;
@@ -53,7 +53,7 @@ namespace {
 	//					{655, 464},{785, 352},{960, 336},{960,476} };
 	//const int line_size = sizeof(line) / sizeof(line[0]);
 
-	////----------------------------------------------
+	//----------------------------------------------
 	//const std::pair<int, int> extraConnections[] = {
 	//	{3, 17}, {4, 17}, {5, 18}, {9, 5},
 	//	{10, 5}, {5, 11}, {11, 17}, {16, 11},
@@ -90,19 +90,21 @@ namespace {
 
 void PlaySceneInit()
 {
-	planet.Init();
+
 	if (galaxy < 0) {
 		galaxy = LoadGraph("data\\texture\\galaxy\\galaxy1.png");
 		assert(galaxy >= 0);
 	}
-	//if (lines < 0) {
-	//	lines = LoadGraph("data\\texture\\lines\\mylines1.png");
-	//	assert(lines >= 0);
-	//}
-	//if (groundImage < 0) {
-	//	groundImage = LoadGraph("data\\texture\\planet\\planet.png");
-	//	assert(groundImage >= 0);
-	//}
+
+	if (lines < 0) {
+		lines = LoadGraph("data\\texture\\lines\\mylines1.png");
+		assert(lines >= 0);
+	}
+	if (groundImage < 0) {
+		groundImage = LoadGraph("data\\texture\\planet\\planet.png");
+		assert(groundImage >= 0);
+
+	}
 	if (distanceImage < 0) {
 		distanceImage = LoadGraph("data\\texture\\ui\\num02.png");
 		assert(distanceImage >= 0);
@@ -111,7 +113,7 @@ void PlaySceneInit()
 		playSound = LoadSoundMem("data\\sound\\playSound\\playSound.wav");
 		assert(playSound >= 0);
 	}
-	
+	planet.Init();
 	PlayerInit();
 	walkCounter= 0;
 	//patternLine = 0;
@@ -166,12 +168,12 @@ void PlaySceneUpdate()
 
 void PlaySceneDraw()
 {
-	planet.Draw();
+	
 
 	//DrawRotaGraph(500, 500,1.0,45,lines,false, false);
 	DrawGraph(0, 0, galaxy, true);
 	DistanceMeter(170, 30);
-
+	planet.Draw();
 
 	//line
 

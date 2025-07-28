@@ -56,14 +56,14 @@ Planet::Planet(float x, float y, float radius, Owner owner, int resources, int i
 void Planet::Init() 
 {
 	//----------------------------------------------
-	if (groundImage < 0) {
-		groundImage = LoadGraph("data\\texture\\ground\\ground1.png");
-		assert(groundImage >= 0);
-	}
-	if (lines < 0) {
-		lines = LoadGraph("data\\texture\\lines\\mylines1.png");
-		assert(lines >= 0);
-	}
+	//if (groundImage < 0) {
+	//	groundImage = LoadGraph("data\\texture\\ground\\ground1.png");
+	//	assert(groundImage >= 0);
+	//}
+	//if (lines < 0) {
+	//	lines = LoadGraph("data\\texture\\lines\\mylines1.png");
+	//	assert(lines >= 0);
+	//}
 	//----------------------------------------------
 	patternLine = 0;
 	patternPlanet = 0;
