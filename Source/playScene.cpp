@@ -17,7 +17,9 @@ namespace {
 		AFTER_PLAY,
 	};
 	PlayStatus status;
-	
+	static const int PLANET_MAX = 20;
+	static Planet planets[PLANET_MAX];
+
 	int galaxy = -1;		//gameの背景画像のハンドル
 	int groundImage = -1;	//地面の画像ハンドル
 	int lines = -1;
@@ -30,18 +32,18 @@ namespace {
 
 	int playSound = -1;	//スタートの音ハンドル
 	int walkCounter;
-
+	//static const int PLANET_MAX = 20;
 	int lineWalkCounter;
 	//----------------------------------------------
 	
 
-	//VectorI2 planet[] = { {689,128},{848, 96},{1008, 128},
-	//						{1136, 224},{1192, 368},{1096, 509},
-	//						{1456, 428},{1408, 592},{1280, 720},
-	//						{1104, 768},{944, 704},{848, 560},
-	//						{848.5, 911},{704, 800},{624, 640},
-	//						{655, 464},{785, 352},{960, 336},{960,476} };
-	//const int planet_size = sizeof(planet) / sizeof(planet[0]);
+	VectorI2 planet1[] = { {689,128},{848, 96},{1008, 128},
+							{1136, 224},{1192, 368},{1096, 509},
+							{1456, 428},{1408, 592},{1280, 720},
+							{1104, 768},{944, 704},{848, 560},
+							{848.5, 911},{704, 800},{624, 640},
+							{655, 464},{785, 352},{960, 336},{960,476} };
+	const int planet_size = sizeof(planet1) / sizeof(planet1[0]);
 	////----------------------------------------------
 	//
 
@@ -72,7 +74,7 @@ namespace {
 	//double dx;
 	//double dy;
 
-	//static const float PLANET_CENTER = 48.0;
+	static const float PLANET_CENTER = 48.0;
 
 	//double planetAngle[planet_size];
 	//double extraAngles[11];
@@ -119,6 +121,7 @@ void PlaySceneInit()
 	//patternLine = 0;
 	//patternPlanet = 0;
 	
+
 
 	
 	//debug

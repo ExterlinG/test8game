@@ -11,7 +11,7 @@ namespace
 	static const float PLANET_CENTER = 48.0; //planet radius
     int groundImage = -1;	//’n–Ê‚Ì‰æ‘œƒnƒ“ƒhƒ‹
     int lines = -1;
-
+	static const int PLANET_MAX = 20;
 
 	VectorI2 planet[] = { {689,128},{848, 96},{1008, 128},
 						{1136, 224},{1192, 368},{1096, 509},
@@ -38,6 +38,32 @@ namespace
 		{18, 11}, {17, 5},{15, 11}
 	};
 	//----------------------------------------------
+	Planet planets[PLANET_MAX] = 
+	{
+
+			Planet(planet[0].x, planet[0].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[1].x, planet[1].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[2].x, planet[2].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[3].x, planet[3].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[4].x, planet[4].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[5].x, planet[5].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[6].x, planet[6].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[7].x, planet[7].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[8].x, planet[8].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[9].x, planet[9].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[10].x, planet[10].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[11].x, planet[11].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[12].x, planet[12].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[13].x, planet[13].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[14].x, planet[14].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[15].x, planet[15].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[16].x, planet[16].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[17].x, planet[17].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[18].x, planet[18].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[19].x, planet[19].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+
+	};
+
 	//animation
 	int patternLine;
 	int patternPlanet;
@@ -51,7 +77,7 @@ namespace
 
 }
 Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image)
-	: x(x), y(y), radius(radius), owner(owner), resources(resources), image(image) {
+	: x(x), y(y), radius(PLANET_CENTER), owner(owner), resources(resources), image(groundImage) {
 }
 void Planet::Init() 
 {
@@ -64,6 +90,18 @@ void Planet::Init()
 	//	lines = LoadGraph("data\\texture\\lines\\mylines1.png");
 	//	assert(lines >= 0);
 	//}
+	for (int i = 0; i < PLANET_MAX; i++) {
+
+		planets[i] = Planet(
+
+			planet[i].x,    // „A„u„‚„u„} X „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
+			planet[i].y,    // „A„u„‚„u„} Y „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
+			PLANET_CENTER,          // „Q„p„t„y„…„ƒ
+			Planet::Owner::NEUTRAL,
+			200,
+			groundImage       // „H„p„s„‚„…„w„u„~„~„p„‘ „„„u„{„ƒ„„„…„‚„p
+		);
+	}
 	//----------------------------------------------
 	patternLine = 0;
 	patternPlanet = 0;
