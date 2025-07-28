@@ -64,6 +64,14 @@ namespace
 
 	};
 
+	const VectorI2 defaultPos[PLANET_MAX] = {
+		{689,128},{848, 96},{1008, 128},
+		{1136, 224},{1192, 368},{1096, 509},
+		{1456, 428},{1408, 592},{1280, 720},
+		{1104, 768},{944, 704},{848, 560},
+		{848.5, 911},{704, 800},{624, 640},
+		{655, 464},{785, 352},{960, 336},{960,476}
+	};
 	//animation
 	int patternLine;
 	int patternPlanet;
@@ -77,7 +85,7 @@ namespace
 
 }
 Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image)
-	: x(x), y(y), radius(PLANET_CENTER), owner(owner), resources(resources), image(groundImage) {
+	: x(x), y(y), radius(radius), owner(owner), resources(resources), image(image) {
 }
 void Planet::Init() 
 {
@@ -94,8 +102,8 @@ void Planet::Init()
 
 		planets[i] = Planet(
 
-			planet[i].x,    // „A„u„‚„u„} X „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
-			planet[i].y,    // „A„u„‚„u„} Y „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
+			defaultPos[i].x,    // „A„u„‚„u„} X „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
+			defaultPos[i].y,    // „A„u„‚„u„} Y „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
 			PLANET_CENTER,          // „Q„p„t„y„…„ƒ
 			Planet::Owner::NEUTRAL,
 			200,
@@ -140,6 +148,8 @@ void Planet::Draw()
 	{
 		DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
 	}
+
+
 }
 void Planet::Release() 
 {
