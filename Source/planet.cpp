@@ -121,11 +121,12 @@ void Planet::Draw()
 	//planet position
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 80;
-	for (int i = 0; i < planet_size; i++)
+	DrawRectGraph(x, y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
+	//for (int i = 0; i < planet_size; i++)
 
-	{
-		DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
-	}
+	//{
+	//	DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
+	//}
 
 	for (int i = 0; i < line_size; i++)
 	{

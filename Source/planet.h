@@ -25,7 +25,7 @@ public:
     float GetY() const { return y; }
     Owner GetOwner() const { return owner; }
 
-private:
+//private:
     float x, y, radius;
     Owner owner;
     int resources;

@@ -106,6 +106,31 @@ namespace {
 	int color;
 	static const bool DEBUG_FONT = true;
 };
+Planet planets[PLANET_MAX] =
+{
+
+		Planet(689,128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1456, 428, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(848.5, 911, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+
+
+};
 
 void PlaySceneInit()
 {
@@ -141,31 +166,6 @@ void PlaySceneInit()
 	//	planet[i] = defaultPos[i];
 	//}
 
-	Planet planets[PLANET_MAX] =
-	{
-
-			Planet(689,128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1456, 428, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(848.5, 911, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-
-
-	};
 	for (int i = 0; i < PLANET_MAX; i++)
 	{
 		planets[i] = Planet(
@@ -234,8 +234,13 @@ void PlaySceneDraw()
 	//DrawRotaGraph(500, 500,1.0,45,lines,false, false);
 	DrawGraph(0, 0, galaxy, true);
 	DistanceMeter(170, 30);
-	planetFunction.Draw();
-
+	//planetFunction.Draw();
+	printf("„O„„„|„p„t„{„p:\n");
+	for (int i = 0; i < PLANET_MAX; i++) {
+		planets[i].Draw();
+		printf("„P„|„p„~„u„„„p %d: x=%.1f, y=%.1f, image=%d\n",
+			i, planets[i].x, planets[i].y, planets[i].image);
+	}
 	//line
 
 	//const int LINE_SPRITE_WIDTH = 16;
