@@ -1,6 +1,6 @@
 #pragma once
 #include "struct.h"
-
+#include <string>
 
 class Planet {
 public:
@@ -9,7 +9,7 @@ public:
 	static const int PLANET_CENTER = 48; // „Q„p„t„y„…„ƒ „„|„p„~„u„„„
     //static const VectorI2 defaultPos[PLANET_MAX];
     //Planet planets[PLANET_MAX];
-    Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
+    Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1),id(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
     Planet(float x, float y, float radius, Owner owner, int resources, int image);
     //void Render() const;
     void Init();
@@ -25,11 +25,17 @@ public:
     float GetX() const { return x; }
     float GetY() const { return y; }
     Owner GetOwner() const { return owner; }
+    float GetRadius() const { return radius; }
+    int GetId() const { return id; }
+    void SetId(int newId) { id = newId; }
+    int GetColor() const { return color; }
 
 //private:
     float x, y, radius;
     Owner owner;
     int resources;
     int groundImage;
+    int id;
+    int color;
 };
 

@@ -162,6 +162,13 @@ void PlaySceneInit()
 		playSound = LoadSoundMem("data\\sound\\playSound\\playSound.wav");
 		assert(playSound >= 0);
 	}
+
+	//Planet id
+	for (int i = 0; i < PLANET_MAX; i++) 
+	{
+		planets[i].SetId(i);  // „P„‚„y„ƒ„r„p„y„r„p„u„} „…„~„y„{„p„|„Ž„~„„u ID
+	}
+	
 	//planetFunction.CalculatePlanetAngles(planetAngle);
 	//planetFunction.CalculateExtraAngles(extraAngles);
 	PlayerInit();
@@ -460,7 +467,7 @@ void DrawExtraLines(double extraAngles[]) {
 
 		// „O„„„‚„y„ƒ„€„r„„r„p„u„} „p„~„y„}„y„‚„€„r„p„~„~„…„ „|„y„~„y„
 		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,144,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
-		DrawLineAA(line[idx1].x + PLANET_CENTER, line[idx1].y + PLANET_CENTER, line[idx2].x + PLANET_CENTER, line[idx2].y + PLANET_CENTER, GetColor(255, 0, 0), 2.0f);
+		DrawLineAA(line[idx1].x + PLANET_CENTER, line[idx1].y + PLANET_CENTER, line[idx2].x + PLANET_CENTER, line[idx2].y + PLANET_CENTER, GetColor(2, 194, 240), 2.0f);
 	}
 }
 
@@ -475,7 +482,7 @@ void DrawLines(double planetAngle[])
 
 		if (!skipLine) {
 			DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 144, LINE_SPRITE_WIDTH, LINE_SPRITE_HEIGHT, 0, 1, planetAngle[i], lines, true, false);
-			DrawLineAA((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, (line[i + 1].x + PLANET_CENTER), (line[i + 1].y + PLANET_CENTER), GetColor(255, 0, 0), 2.0f);
+			DrawLineAA((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, (line[i + 1].x + PLANET_CENTER), (line[i + 1].y + PLANET_CENTER), GetColor(2, 194, 240), 2.0f);
 
 		}
 	}

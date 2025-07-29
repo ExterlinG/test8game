@@ -35,6 +35,29 @@ void PlayerInit()
 	}
 	PlayerReset();
 }
+//--------------------------------------------------------------------------------
+void Player::Update(std::vector<Planet>& planets, std::vector<Ship>& ships) {
+	if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+		int mouseX, mouseY;
+		GetMousePoint(&mouseX, &mouseY);
+
+		for (auto& planet : planets) {
+			// „P„‚„€„r„u„‚„‘„u„} „‚„p„ƒ„ƒ„„„€„‘„~„y„u „ƒ „…„‰„v„„„€„} „‚„p„t„y„…„ƒ„p
+			float dx = planet.GetX() - mouseX;
+			float dy = planet.GetY() - mouseY;
+			float dist = sqrtf(dx * dx + dy * dy);
+
+			if (dist <= planet.GetRadius()) {
+				selectedPlanetId = planet.GetId();
+				printf("„B„„q„‚„p„~„p „„|„p„~„u„„„p ID: %d („Q„p„t„y„…„ƒ: %.1f)\n",
+					selectedPlanetId, planet.GetRadius());
+				break;
+			}
+		}
+	}
+}
+
+//--------------------------------------------------------------------------------
 
 void PlayerReset()
 {
