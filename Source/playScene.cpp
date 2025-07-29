@@ -195,10 +195,10 @@ void PlaySceneInit()
 		);
 	}
 
-
+	//planets[0].SetOwner(Planet::Owner::PLAYER);
 	
 	//debug
-	color = GetColor(255, 255, 255);
+	//color = GetColor(255, 255, 255);
 
 }
 void PlaySceneUpdate()

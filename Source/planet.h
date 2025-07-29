@@ -28,7 +28,7 @@ public:
     float GetRadius() const { return radius; }
     int GetId() const { return id; }
     void SetId(int newId) { id = newId; }
-    int GetColor() const { return color; }
+    int GetColor(int r,int g,int b) const { return color; }
 
 //private:
     float x, y, radius;
@@ -37,5 +37,5 @@ public:
     int groundImage;
     int id;
     int color;
-};
+    };
 
