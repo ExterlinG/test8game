@@ -75,6 +75,8 @@ namespace
 	//animation
 	int patternLine;
 	int patternPlanet;
+	int walkCounter;
+	int lineWalkCounter;
 	//----------------------------------------------
 	VectorI2 lineAngle[];
 	double dx;
@@ -85,7 +87,7 @@ namespace
 
 }
 Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image)
-	: x(x), y(y), radius(radius), owner(owner), resources(resources), image(image) {
+	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image) {
 }
 void Planet::Init() 
 {
@@ -114,6 +116,12 @@ void Planet::Update()
 
 
 	// Update logic for the planet can be added here
+	walkCounter++;
+	lineWalkCounter++;
+	patternPlanet = (walkCounter / 6)% 77;
+
+
+	patternLine = (lineWalkCounter / 10) % 6;
 }
 
 void Planet::Draw()
@@ -128,15 +136,15 @@ void Planet::Draw()
 	//	DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
 	//}
 
-	for (int i = 0; i < line_size; i++)
-	{
-		bool skipLine = (i == 5 || i == 11 || i == 18);
+	//for (int i = 0; i < line_size; i++)
+	//{
+	//	bool skipLine = (i == 5 || i == 11 || i == 18);
 
 
-		if (!skipLine) {
-			DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[i], lines, true, false);
-		}
-	}
+	//	if (!skipLine) {
+	//		DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[i], lines, true, false);
+	//	}
+	//}
 
 	//more center lines „t„€„„€„|„~„y„„„u„|„Ž„~„„u „|„y„~„y„y.
 	Planet::DrawExtraLines(extraAngles);
@@ -190,7 +198,18 @@ void Planet::CalculateExtraAngles(double extraAngles[]) {
 		extraAngles[i] = atan2(dy, dx);
 	}
 }
-
+void DrawLines(double planetAngles[])
+{
+	const int LINE_SPRITE_WIDTH = 16;
+	const int LINE_SPRITE_HEIGHT = 80;
+	for (int i = 0; i < line_size; i++)
+	{
+		bool skipLine = (i == 5 || i == 11 || i == 18);
+		if (!skipLine) {
+			DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngles[i], lines, true, false);
+		}
+	}
+}
 void Planet::DrawExtraLines(double extraAngles[]) {
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 80;

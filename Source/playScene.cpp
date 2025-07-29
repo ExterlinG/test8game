@@ -9,6 +9,7 @@
 #include "planet.h"
 
 static const float PLANET_CENTER = 48.0;
+
 namespace {
 	Planet planetFunction;
 	enum class PlayStatus {
@@ -17,7 +18,8 @@ namespace {
 		AFTER_PLAY,
 	};
 	PlayStatus status;
-	static const int PLANET_MAX = 20;
+	static const int PLANET_MAX = 19;
+	//static const int planet_size = PLANET_MAX; 
 	VectorI2 planet[PLANET_MAX];
 	//extern Planet planets[PLANET_MAX];
 	//extern VectorI2 defaultPos[PLANET_MAX];
@@ -92,9 +94,11 @@ namespace {
 	//double dy;
 
 
-
-	//double planetAngle[planet_size];
-	//double extraAngles[11];
+	//static const int planet_size = PLANET_MAX;
+	double planetAngle[PLANET_MAX];
+    
+    
+	double extraAngles[11];
 	//double planetAngle = 1.57f;
 	//double enemyScale = 0.5f;
 
@@ -157,7 +161,8 @@ void PlaySceneInit()
 		playSound = LoadSoundMem("data\\sound\\playSound\\playSound.wav");
 		assert(playSound >= 0);
 	}
-	planetFunction.Init();
+	planetFunction.CalculatePlanetAngles(planetAngle);
+	planetFunction.CalculateExtraAngles(extraAngles);
 	PlayerInit();
 	walkCounter= 0;
 	//patternLine = 0;
@@ -239,9 +244,12 @@ void PlaySceneDraw()
 	for (int i = 0; i < PLANET_MAX; i++) {
 		planets[i].Draw();
 		printf("„P„|„p„~„u„„„p %d: x=%.1f, y=%.1f, image=%d\n",
-			i, planets[i].x, planets[i].y, planets[i].image);
+			i, planets[i].x, planets[i].y, planets[i].groundImage);
 	}
 	//line
+	planetFunction.DrawLines(planetAngle);
+ 
+	planetFunction.DrawExtraLines(extraAngles);
 
 	//const int LINE_SPRITE_WIDTH = 16;
 	//const int LINE_SPRITE_HEIGHT = 80;
