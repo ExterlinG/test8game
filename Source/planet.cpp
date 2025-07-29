@@ -98,19 +98,8 @@ void Planet::Init()
 	//	lines = LoadGraph("data\\texture\\lines\\mylines1.png");
 	//	assert(lines >= 0);
 	//}
-	for (int i = 0; i < PLANET_MAX; i++) 
-	{
 
-		planets[i] = Planet(
 
-			defaultPos[i].x,    // „A„u„‚„u„} X „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
-			defaultPos[i].y,    // „A„u„‚„u„} Y „y„x „€„q„‹„u„s„€ „}„p„ƒ„ƒ„y„r„p
-			PLANET_CENTER,          // „Q„p„t„y„…„ƒ
-			Planet::Owner::NEUTRAL,
-			200,
-			groundImage       // „H„p„s„‚„…„w„u„~„~„p„‘ „„„u„{„ƒ„„„…„‚„p
-		);
-	}
 	//----------------------------------------------
 		//angle
 	Planet::CalculatePlanetAngles(planetAngle);
@@ -129,8 +118,15 @@ void Planet::Update()
 
 void Planet::Draw()
 {
+	//planet position
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 80;
+	for (int i = 0; i < planet_size; i++)
+
+	{
+		DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
+	}
+
 	for (int i = 0; i < line_size; i++)
 	{
 		bool skipLine = (i == 5 || i == 11 || i == 18);
@@ -144,13 +140,9 @@ void Planet::Draw()
 	//more center lines „t„€„„€„|„~„y„„„u„|„Ž„~„„u „|„y„~„y„y.
 	Planet::DrawExtraLines(extraAngles);
 
-	//planet position
 
-	for (int i = 0; i < planet_size; i++)
 
-	{
-		DrawRectGraph(planet[i].x, planet[i].y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
-	}
+
 
 
 }

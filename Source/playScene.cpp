@@ -8,7 +8,7 @@
 #include <vector>
 #include "planet.h"
 
-
+static const float PLANET_CENTER = 48.0;
 namespace {
 	Planet planetFunction;
 	enum class PlayStatus {
@@ -18,10 +18,25 @@ namespace {
 	};
 	PlayStatus status;
 	static const int PLANET_MAX = 20;
-	static Planet planets[PLANET_MAX];
-	extern Planet planets[PLANET_MAX];
-	extern VectorI2 defaultPos[PLANET_MAX];
-	extern VectorI2 planet[];
+	VectorI2 planet[PLANET_MAX];
+	//extern Planet planets[PLANET_MAX];
+	//extern VectorI2 defaultPos[PLANET_MAX];
+	//extern VectorI2 planet[];
+
+
+
+	const VectorI2 defaultPos[PLANET_MAX] = {
+		{689,128},{848, 96},{1008, 128},
+		{1136, 224},{1192, 368},{1096, 509},
+		{1456, 428},{1408, 592},{1280, 720},
+		{1104, 768},{944, 704},{848, 560},
+		{848.5, 911},{704, 800},{624, 640},
+		{655, 464},{785, 352},{960, 336},{960,476}
+	};
+
+
+
+
 	int galaxy = -1;		//game‚Ì”wŒi‰æ‘œ‚Ìƒnƒ“ƒhƒ‹
 	int groundImage = -1;	//’n–Ê‚Ì‰æ‘œƒnƒ“ƒhƒ‹
 	int lines = -1;
@@ -76,7 +91,7 @@ namespace {
 	//double dx;
 	//double dy;
 
-	static const float PLANET_CENTER = 48.0;
+
 
 	//double planetAngle[planet_size];
 	//double extraAngles[11];
@@ -122,7 +137,46 @@ void PlaySceneInit()
 	walkCounter= 0;
 	//patternLine = 0;
 	//patternPlanet = 0;
-	
+	//for (int i = 0; i < PLANET_MAX; i++) {
+	//	planet[i] = defaultPos[i];
+	//}
+
+	Planet planets[PLANET_MAX] =
+	{
+
+			Planet(689,128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1456, 428, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(848.5, 911, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+
+
+	};
+	for (int i = 0; i < PLANET_MAX; i++)
+	{
+		planets[i] = Planet(
+			defaultPos[i].x,
+			defaultPos[i].y,
+			PLANET_CENTER,
+			Planet::Owner::NEUTRAL,
+			200,
+			groundImage
+		);
+	}
 
 
 	
@@ -173,14 +227,14 @@ void PlaySceneUpdate()
 
 void PlaySceneDraw()
 {
-	for (int i = 0; i < PLANET_MAX; i++) {
-		planets[i].Draw(); // „O„„„‚„y„ƒ„€„r„„r„p„u„} „„|„p„~„u„„„ „y„x planet.cpp
-	}
+	//for (int i = 0; i < PLANET_MAX; i++) {
+	//	planetFunction.Draw(); // „O„„„‚„y„ƒ„€„r„„r„p„u„} „„|„p„~„u„„„ „y„x planet.cpp
+	//}
 
 	//DrawRotaGraph(500, 500,1.0,45,lines,false, false);
 	DrawGraph(0, 0, galaxy, true);
 	DistanceMeter(170, 30);
-	//planet.Draw();
+	planetFunction.Draw();
 
 	//line
 
