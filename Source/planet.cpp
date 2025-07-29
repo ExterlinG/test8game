@@ -90,10 +90,11 @@ Planet::Planet(float x, float y, float radius, Owner owner, int resources, int i
 	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image) {
 
 	// „T„ƒ„„„p„~„p„r„|„y„r„p„u„} „ˆ„r„u„„ „r „x„p„r„y„ƒ„y„}„€„ƒ„„„y „€„„ „r„|„p„t„u„|„„ˆ„p
-	switch (owner) {
-	case Owner::PLAYER: color = GetColor(0,255,0); break;   // „H„u„|„v„~„„z
-	case Owner::ENEMY: color = GetColor(255, 0, 0); break;    // „K„‚„p„ƒ„~„„z
-	default: color = GetColor(128, 128, 128); break;          // „R„u„‚„„z („~„u„z„„„‚„p„|„„~„„z)
+	switch (owner) 
+	{
+		case Owner::PLAYER: color = GetColor(0, 255, 0); break;   // „H„u„|„v„~„„z
+		case Owner::ENEMY: color = GetColor(255, 0, 0); break;    // „K„‚„p„ƒ„~„„z
+		default: color = GetColor(128, 128, 128); break;          // „R„u„‚„„z („~„u„z„„„‚„p„|„„~„„z)
 	}
 }
 void Planet::Init() 
@@ -180,10 +181,17 @@ void Planet::SetOwner(Owner newOwner)
     owner = newOwner;
 	switch (owner) 
 	{
-	case Owner::PLAYER: color = DrawCircle(x, y, radius, GetColor(0,255), FALSE); break;
-	case Owner::ENEMY: color = DrawCircle(x, y, radius, GetColor(255, 255, 255), FALSE); break;
-	default: color = DrawCircle(x, y, radius, GetColor(255, 255, 255), FALSE); break;
+	case Owner::PLAYER:
+		color = GetColor(0, 255, 0); // „H„u„|„u„~„„z „t„|„‘ „y„s„‚„€„{„p
+		break;
+	case Owner::ENEMY:
+		color = GetColor(255, 0, 0);  // „K„‚„p„ƒ„~„„z „t„|„‘ „r„‚„p„s„p
+		break;
+	default:
+		color = GetColor(255, 255, 255); // „A„u„|„„z „t„|„‘ „~„u„z„„„‚„p„|„„~„„‡
+		break;
 	}
+	DrawCircle(x, y, radius, color, FALSE);
 }
 
 void Planet::CalculatePlanetAngles(double planetAngle[]) {  // first lines „|„y„~„y„y „ƒ„r„‘„x„„r„p„„‹„y„u „„|„p„~„u„„„ „„€„ƒ„|„u„t„€„r„p„„„u„|„„~„€
