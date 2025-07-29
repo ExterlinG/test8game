@@ -146,7 +146,7 @@ void PlaySceneInit()
 	}
 
 	if (lines < 0) {
-		lines = LoadGraph("data\\texture\\lines\\mylines1.png");
+		lines = LoadGraph("data\\texture\\lines\\mylines2.png");
 		assert(lines >= 0);
 	}
 	if (groundImage < 0) {
@@ -201,7 +201,7 @@ void PlaySceneUpdate()
 
 	//walkCounter++;
 	lineWalkCounter++;
-	patternLine = (lineWalkCounter / 10) % 6;
+	patternLine = (lineWalkCounter / 10) % 10;
 	
 	//if (lineWalkCounter > 60)
 	//{
@@ -459,7 +459,7 @@ void DrawExtraLines(double extraAngles[]) {
 		int midY = (line[idx1].y + line[idx2].y) / 2;
 
 		// ÑOÑÑÑÇÑyÑÉÑÄÑrÑçÑrÑpÑuÑ} ÑpÑ~ÑyÑ}ÑyÑÇÑÄÑrÑpÑ~Ñ~ÑÖÑê Ñ|ÑyÑ~ÑyÑê
-		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,80,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
+		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,144,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
 		DrawLineAA(line[idx1].x + PLANET_CENTER, line[idx1].y + PLANET_CENTER, line[idx2].x + PLANET_CENTER, line[idx2].y + PLANET_CENTER, GetColor(255, 0, 0), 2.0f);
 	}
 }
@@ -467,17 +467,19 @@ void DrawExtraLines(double extraAngles[]) {
 void DrawLines(double planetAngle[]) 
 {
 	const int LINE_SPRITE_WIDTH = 16;
-	const int LINE_SPRITE_HEIGHT = 80;
-	for (int i = 0; i < line_size; i++) 
+	const int LINE_SPRITE_HEIGHT = 144;
+	for (int i = 0; i < line_size; i++)
 	{
-		bool skipLine = (i == 5 || i == 11 || i == 18); // ÑPÑÇÑÄÑÅÑÖÑÉÑ{ÑpÑuÑ} Ñ|ÑyÑ~ÑyÑy, Ñ{ÑÄÑÑÑÄÑÇÑçÑu Ñ~Ñu Ñ~ÑÖÑwÑ~ÑÄ ÑÇÑyÑÉÑÄÑrÑpÑÑÑé
-		if (!skipLine) 
-		{
-			DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[i], lines, true, false);
-			DrawLineAA((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, (line[i+1].x + PLANET_CENTER), (line[i + 1].y + PLANET_CENTER), GetColor(255, 0, 0), 2.0f);
+		bool skipLine = (i == 5 || i == 11 || i == 18);
+
+
+		if (!skipLine) {
+			DrawRectRotaGraph2((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, patternLine * 16, 112, 144, LINE_SPRITE_WIDTH, LINE_SPRITE_HEIGHT, 0, 1, planetAngle[i], lines, true, false);
+			DrawLineAA((line[i].x + PLANET_CENTER), line[i].y + PLANET_CENTER, (line[i + 1].x + PLANET_CENTER), (line[i + 1].y + PLANET_CENTER), GetColor(255, 0, 0), 2.0f);
+
 		}
 	}
-	
+
 }
 
 //check
