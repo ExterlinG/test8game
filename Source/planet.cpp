@@ -198,7 +198,7 @@ void Planet::CalculateExtraAngles(double extraAngles[]) {
 		extraAngles[i] = atan2(dy, dx);
 	}
 }
-void DrawLines(double planetAngles[])
+void Planet:: DrawLines(double planetAngles[])
 {
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 80;
