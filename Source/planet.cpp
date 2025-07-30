@@ -12,7 +12,7 @@ namespace
     int groundImage = -1;	//ínñ ÇÃâÊëúÉnÉìÉhÉã
     int lines = -1;
 	static const int PLANET_MAX = 20;
-
+	
 	VectorI2 planet[] = { {689,128},{848, 96},{1008, 128},
 						{1136, 224},{1192, 368},{1096, 509},
 						{1456, 428},{1408, 592},{1280, 720},
@@ -41,26 +41,26 @@ namespace
 	Planet planets[PLANET_MAX] = 
 	{
 
-			Planet(planet[0].x, planet[0].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[1].x, planet[1].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[2].x, planet[2].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[3].x, planet[3].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[4].x, planet[4].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[5].x, planet[5].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[6].x, planet[6].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[7].x, planet[7].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[8].x, planet[8].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[9].x, planet[9].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[10].x, planet[10].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[11].x, planet[11].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[12].x, planet[12].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[13].x, planet[13].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[14].x, planet[14].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[15].x, planet[15].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[16].x, planet[16].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[17].x, planet[17].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[18].x, planet[18].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-			Planet(planet[19].x, planet[19].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+			Planet(planet[0].x, planet[0].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[1].x, planet[1].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[2].x, planet[2].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[3].x, planet[3].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[4].x, planet[4].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[5].x, planet[5].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[6].x, planet[6].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[7].x, planet[7].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[8].x, planet[8].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[9].x, planet[9].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[10].x, planet[10].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[11].x, planet[11].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[12].x, planet[12].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[13].x, planet[13].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[14].x, planet[14].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[15].x, planet[15].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[16].x, planet[16].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[17].x, planet[17].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[18].x, planet[18].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[19].x, planet[19].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
 
 	};
 
@@ -86,8 +86,8 @@ namespace
 	double extraAngles[11];
 
 }
-Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image)
-	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image) {
+Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image, int color, int id)
+	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image),color(color),planetId(id) {
 
 	
 
@@ -177,16 +177,16 @@ void Planet::SetOwner(Owner newOwner)
 	switch (owner) 
 	{
 	case Owner::PLAYER:
-		color = GetColor(0,255,0); // ÑHÑuÑ|ÑuÑ~ÑçÑz ÑtÑ|Ñë ÑyÑsÑÇÑÄÑ{Ñp
+		color = GetColor(255,0,0); // ÑHÑuÑ|ÑuÑ~ÑçÑz ÑtÑ|Ñë ÑyÑsÑÇÑÄÑ{Ñp
 		break;
 	case Owner::ENEMY:
-		color = GetColor(255, 0, 0);  // ÑKÑÇÑpÑÉÑ~ÑçÑz ÑtÑ|Ñë ÑrÑÇÑpÑsÑp
+		color = GetColor(255, 255, 0);  // ÑKÑÇÑpÑÉÑ~ÑçÑz ÑtÑ|Ñë ÑrÑÇÑpÑsÑp
 		break;
 	default:
-		color = GetColor(150, 150, 150); // ÑAÑuÑ|ÑçÑz ÑtÑ|Ñë Ñ~ÑuÑzÑÑÑÇÑpÑ|ÑéÑ~ÑçÑá
+		color = GetColor(128, 128, 128); // ÑAÑuÑ|ÑçÑz ÑtÑ|Ñë Ñ~ÑuÑzÑÑÑÇÑpÑ|ÑéÑ~ÑçÑá
 		break;
 	}
-	DrawCircle(x, y, radius, color, FALSE);
+	DrawCircle(x+PLANET_CENTER, y+PLANET_CENTER, 35, color, FALSE,5.0f);
 }
 
 void Planet::CalculatePlanetAngles(double planetAngle[]) {  // first lines Ñ|ÑyÑ~ÑyÑy ÑÉÑrÑëÑxÑçÑrÑpÑêÑãÑyÑu ÑÅÑ|ÑpÑ~ÑuÑÑÑç ÑÅÑÄÑÉÑ|ÑuÑtÑÄÑrÑpÑÑÑuÑ|ÑéÑ~ÑÄ

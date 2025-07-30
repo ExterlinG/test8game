@@ -54,7 +54,7 @@ namespace {
 	//static const int PLANET_MAX = 20;
 	int lineWalkCounter;
 	//----------------------------------------------
-	
+
 
 	//VectorI2 planet[] = { {689,128},{848, 96},{1008, 128},
 	//						{1136, 224},{1192, 368},{1096, 509},
@@ -96,8 +96,8 @@ namespace {
 
 	//static const int planet_size = PLANET_MAX;
 	double planetAngle[line_size];
-    
-    
+
+
 	double extraAngles[11];
 	//double planetAngle = 1.57f;
 	//double enemyScale = 0.5f;
@@ -107,31 +107,31 @@ namespace {
 
 
 	//debug
-	int color;
+	int color = GetColor(150, 150, 150);
 	static const bool DEBUG_FONT = true;
 };
 Planet planets[PLANET_MAX] =
 {
 
-		Planet(689,128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1456, 428, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(848.5, 911, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
-		Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1),
+		Planet(689,128, PLANET_CENTER, Planet::Owner::PLAYER, 200, -1,planets->color,-1),
+		Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1456, 428, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,planets->color,-1),
+		Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(848.5, 911, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,planets->color,-1),
+		Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
 
 
 };
@@ -164,15 +164,15 @@ void PlaySceneInit()
 	}
 
 	//Planet id
-	for (int i = 0; i < PLANET_MAX; i++) 
+	for (int i = 0; i < PLANET_MAX; i++)
 	{
 		planets[i].SetId(i);  // „P„‚„y„ƒ„r„p„y„r„p„u„} „…„~„y„{„p„|„„~„„u ID
 	}
-	
+
 	//planetFunction.CalculatePlanetAngles(planetAngle);
 	//planetFunction.CalculateExtraAngles(extraAngles);
 	PlayerInit();
-	walkCounter= 0;
+	walkCounter = 0;
 	patternLine = 0;
 	//patternPlanet = 0;
 	//for (int i = 0; i < PLANET_MAX; i++) {
@@ -191,12 +191,14 @@ void PlaySceneInit()
 			PLANET_CENTER,
 			Planet::Owner::NEUTRAL,
 			200,
-			groundImage
+			groundImage,
+			color,
+			planets[i].planetId
 		);
 	}
 
 	//planets[0].SetOwner(Planet::Owner::PLAYER);
-	
+
 	//debug
 	//color = GetColor(255, 255, 255);
 
@@ -209,7 +211,7 @@ void PlaySceneUpdate()
 	//walkCounter++;
 	lineWalkCounter++;
 	patternLine = (lineWalkCounter / 10) % 10;
-	
+
 	//if (lineWalkCounter > 60)
 	//{
 	//	lineToPlanet.x += 2;
@@ -219,16 +221,16 @@ void PlaySceneUpdate()
 		//–Ú•WÀ•WiƒvƒŒƒCƒ„[j‚©‚çƒGƒlƒ~[‚ÌÀ•W‚ğ‚ğˆø‚¢‚ÄƒxƒNƒgƒ‹d‚ğ‹‚ß‚é(dx,dy)
 
 
-  
-  
-	
+
+
+
 	//for (int i = 0; i < planet_size; i++)
 	//{
 	//	double dx[i] = ((planet[i].x + PLANET_CENTER) - (planet[i + 1].x + PLANET_CENTER));
 	//	double dy[i] = ((planet[i].y + PLANET_CENTER) - (planet[i + 1].y + PLANET_CENTER));
 	//	planetAngle[i] = atan2(dy[i], dx[i]);
 	//}
-	
+
 	//double dx =-(enemyPosX+48);
 	//double dy =176.0-(enemyPosY+48);
 
@@ -237,7 +239,7 @@ void PlaySceneUpdate()
 	//Angle‚Æ‘¬“x‚ğ‘«‚µ‚ÄÀ•W‚ğ•Ï‚¦‚é
 	//enemyPosX = cos(planetAngle);
 	//enemyPosY = sin(planetAngle);
-	
+
 }
 
 void PlaySceneDraw()
@@ -248,6 +250,7 @@ void PlaySceneDraw()
 
 	//DrawRotaGraph(500, 500,1.0,45,lines,false, false);
 	DrawGraph(0, 0, galaxy, true);
+	//planetFunction.SetOwner(Planet::Owner::PLAYER);
 	DistanceMeter(170, 30);
 	//lines
 	DrawLines(planetAngle);
@@ -255,10 +258,27 @@ void PlaySceneDraw()
 	DrawExtraLines(extraAngles);
 	//planetFunction.Draw();
 	printf("„O„„„|„p„t„{„p:\n");
-	for (int i = 0; i < PLANET_MAX; i++) {
+	for (int i = 0; i < PLANET_MAX; i++)
+	{
 		planets[i].Draw();
-		printf("„P„|„p„~„u„„„p %d: x=%.1f, y=%.1f, image=%d\n",
-			i, planets[i].x, planets[i].y, planets[i].groundImage);
+		if (i == 0)
+		{
+			planets[i].SetOwner(Planet::Owner::PLAYER);
+		}
+		else if (i == 6)
+		{
+			planets[i].SetOwner(Planet::Owner::ENEMY);
+		}
+		else
+		{
+			planets[i].SetOwner(Planet::Owner::NEUTRAL);
+		}
+		//DrawCircle(static_cast<int>(planets[i].x + PLANET_CENTER), static_cast<int>(planets[i].y + PLANET_CENTER),35,GetColor(2, 194, 240),FALSE, 5.0f);
+			//printf("„P„|„p„~„u„„„p %d: x=%.1f, y=%.1f, image=%d\n",
+			//	i, planets[i].x, planets[i].y, planets[i].groundImage);
+		//DrawCircle(planets[i].x+PLANET_CENTER, planets[i].y + PLANET_CENTER, 35, GetColor(2, 194, 240), FALSE,5.0f);
+
+
 	}
 	//line
 	//planetFunction.DrawLines(planetAngle);
@@ -282,7 +302,7 @@ void PlaySceneDraw()
 	// 
 	// 
 		//DrawRectRotaGraph2((line[11].x + PLANET_CENTER), line[11].y + PLANET_CENTER, patternLine * 16, 112, 80, LINE_SPRITE_WIDTH + PLANET_CENTER, LINE_SPRITE_HEIGHT + PLANET_CENTER, 0, 1, planetAngle[11], lines, true, false);
-	
+
 		//DrawRectRotaGraph2(848 + PLANET_CENTER, 96 + PLANET_CENTER, patternLine * 16, 112, 80, 16, -48, 0, 1, planetAngle, lines, true, false);//lines red-gray 1
 		//DrawRectRotaGraph2(1008 + PLANET_CENTER, 128 + PLANET_CENTER, patternLine * 16, 112, 80, 16, -48, 0, 1, planetAngle, lines, true, false);//lines gray 1- gray 2
 
@@ -327,7 +347,7 @@ void PlaySceneDraw()
 			//8. planet[16] „y planet[11].
 			//9. planet[17] „y planet[11].
 			//10. planet[17] „y planet[5].
-			
+
 
 			//1. planet[17] „y planet[18].
 			//2. planet[11] „y planet[18].
@@ -344,23 +364,23 @@ void PlaySceneDraw()
 		//DrawRotaGraph2(848, 128, linePos.x*16, 112, 1, planetAngle, lines, true, false);
 		//DrawRectRotaGraph(enemyPosX, enemyPosY, linePos.x*16, 112,80,16, 1, planetAngle, lines, true, false);//lines rotated
 		//DrawRectRotaGraph2(848+48, 96+48, linePos.x * 16, 112, 80, 16, 0, 0, 1, planetAngle, lines, true, false);//lines rotated
-		PlayerDraw();
+	PlayerDraw();
 
 
-		if (DEBUG_FONT) {
-			DrawFormatString(20, 30, color, "EnemyStatus");
-			//DrawFormatString(20, 50, color, "PosX %f, PosY %f ", enemyPosX, enemyPosY);
+	if (DEBUG_FONT) {
+		DrawFormatString(20, 30, color, "EnemyStatus");
+		//DrawFormatString(20, 50, color, "PosX %f, PosY %f ", enemyPosX, enemyPosY);
 
-			//Angle‚ÍŠp“x‚Å‚Í‚È‚­Aƒ‰ƒWƒAƒ“i1.5790“xj‚Å•\Œ»‚³‚ê‚é
-			//75s–Ú‚Ì’†g
-			//DrawFormatString(20, 70, color, "Angle %f ", planetAngle);
+		//Angle‚ÍŠp“x‚Å‚Í‚È‚­Aƒ‰ƒWƒAƒ“i1.5790“xj‚Å•\Œ»‚³‚ê‚é
+		//75s–Ú‚Ì’†g
+		//DrawFormatString(20, 70, color, "Angle %f ", planetAngle);
 
-			//XÀ•W‚ÆYÀ•W‚Ö‚ÌˆÚ“®—Ê
-			//78s–ÚA79s–Ú‚Ì’†g
-			//DrawFormatString(20, 120, color, "XMove %f ", cos(planetAngle));
-			//DrawFormatString(20, 140, color, "YMove %f ", sin(planetAngle));
-		}
+		//XÀ•W‚ÆYÀ•W‚Ö‚ÌˆÚ“®—Ê
+		//78s–ÚA79s–Ú‚Ì’†g
+		//DrawFormatString(20, 120, color, "XMove %f ", cos(planetAngle));
+		//DrawFormatString(20, 140, color, "YMove %f ", sin(planetAngle));
 	}
+}
 
 void PlaySceneRelease()
 {
@@ -421,7 +441,7 @@ void CalculatePlanetAngles(double planetAngle[]) {  // first lines „|„y„~„y„y „ƒ
 		planetAngle[i] = atan2(dy, dx);  // atan2 „r„€„x„r„‚„p„‹„p„u„„ double
 	}
 }
- //more lines „t„€„„€„|„~„y„„„u„|„„~„„u „|„y„~„y„y
+//more lines „t„€„„€„|„~„y„„„u„|„„~„„u „|„y„~„y„y
 void CalculateExtraAngles(double extraAngles[]) {
 	// „P„p„‚„ „„|„p„~„u„„ „t„|„‘ „t„€„„€„|„~„y„„„u„|„„~„„‡ „ƒ„€„u„t„y„~„u„~„y„z
 
@@ -466,12 +486,12 @@ void DrawExtraLines(double extraAngles[]) {
 		int midY = (line[idx1].y + line[idx2].y) / 2;
 
 		// „O„„„‚„y„ƒ„€„r„„r„p„u„} „p„~„y„}„y„‚„€„r„p„~„~„…„ „|„y„~„y„
-		DrawRectRotaGraph2(midX + PLANET_CENTER,midY + PLANET_CENTER,patternLine * 16,112,144,LINE_SPRITE_WIDTH,LINE_SPRITE_HEIGHT,0,1,extraAngles[i],lines,true,false);
+		DrawRectRotaGraph2(midX + PLANET_CENTER, midY + PLANET_CENTER, patternLine * 16, 112, 144, LINE_SPRITE_WIDTH, LINE_SPRITE_HEIGHT, 0, 1, extraAngles[i], lines, true, false);
 		DrawLineAA(line[idx1].x + PLANET_CENTER, line[idx1].y + PLANET_CENTER, line[idx2].x + PLANET_CENTER, line[idx2].y + PLANET_CENTER, GetColor(2, 194, 240), 2.0f);
 	}
 }
 
-void DrawLines(double planetAngle[]) 
+void DrawLines(double planetAngle[])
 {
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 144;
