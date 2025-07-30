@@ -10,7 +10,7 @@ public:
     //static const VectorI2 defaultPos[PLANET_MAX];
     //Planet planets[PLANET_MAX];
     
-    Planet(float x, float y, float radius, Owner owner, int resources, int image, int color,int id);
+    Planet(float x, float y, float radius, Owner owner, int resources, int image,int color, int id);
     Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1), color(GetColor(150, 150, 150)), planetId(-1) {} // ÑDÑÄÑqÑpÑrÑ|ÑuÑ~ Ñ{ÑÄÑ~ÑÉÑÑÑÇÑÖÑ{ÑÑÑÄÑÇ ÑÅÑÄ ÑÖÑ}ÑÄÑ|ÑâÑpÑ~ÑyÑê
     //void Render() const;
     void Init();
@@ -29,7 +29,8 @@ public:
     float GetRadius() const { return radius; }
     int GetId() const { return planetId; }
     void SetId(int newId) { planetId = newId; }
-    int GetColor(int r,int g,int b) const { return color; }
+    //int GetColor(int r, int g, int b) const { return color; }
+    int GetColor(int r, int g, int b) const { return color; }
 
 //private:
     float x, y, radius;

@@ -39,29 +39,29 @@ namespace
 	};
 	//----------------------------------------------
 
-	Planet planets[PLANET_MAX] = 
+	Planet planets[PLANET_MAX] =
 	{
 
-			Planet(planet[0].x, planet[0].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[1].x, planet[1].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[2].x, planet[2].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[3].x, planet[3].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[4].x, planet[4].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[5].x, planet[5].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[6].x, planet[6].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[7].x, planet[7].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[8].x, planet[8].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[9].x, planet[9].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[10].x, planet[10].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[11].x, planet[11].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[12].x, planet[12].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[13].x, planet[13].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[14].x, planet[14].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[15].x, planet[15].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[16].x, planet[16].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[17].x, planet[17].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[18].x, planet[18].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
-			Planet(planet[19].x, planet[19].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,color(GetColor(150, 150, 150)),-1),
+			Planet(planet[0].x, planet[0].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[1].x, planet[1].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[2].x, planet[2].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[3].x, planet[3].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[4].x, planet[4].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[5].x, planet[5].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[6].x, planet[6].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[7].x, planet[7].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[8].x, planet[8].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[9].x, planet[9].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[10].x, planet[10].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[11].x, planet[11].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[12].x, planet[12].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[13].x, planet[13].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[14].x, planet[14].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[15].x, planet[15].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[16].x, planet[16].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[17].x, planet[17].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[18].x, planet[18].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+			Planet(planet[19].x, planet[19].y, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
 
 	};
 
@@ -85,7 +85,7 @@ namespace
 	//----------------------------------------------
 	double planetAngle[planet_size];
 	double extraAngles[11];
-
+	
 }
 
 	

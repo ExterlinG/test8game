@@ -107,7 +107,7 @@ namespace {
 
 
 	//debug
-	int color = GetColor(150, 150, 150);
+	int color;
 	static const bool DEBUG_FONT = true;
 };
 Planet planets[PLANET_MAX] =
@@ -167,6 +167,7 @@ void PlaySceneInit()
 	for (int i = 0; i < PLANET_MAX; i++)
 	{
 		planets[i].SetId(i);  // „P„‚„y„ƒ„r„p„y„r„p„u„} „…„~„y„{„p„|„Ž„~„„u ID
+		
 	}
 
 	//planetFunction.CalculatePlanetAngles(planetAngle);
@@ -369,6 +370,7 @@ void PlaySceneDraw()
 
 	if (DEBUG_FONT) {
 		DrawFormatString(20, 30, color, "EnemyStatus");
+		
 		//DrawFormatString(20, 50, color, "PosX %f, PosY %f ", enemyPosX, enemyPosY);
 
 		//Angle‚ÍŠp“x‚Å‚Í‚È‚­Aƒ‰ƒWƒAƒ“i1.5790“xj‚Å•\Œ»‚³‚ê‚é
@@ -379,6 +381,11 @@ void PlaySceneDraw()
 		//78s–ÚA79s–Ú‚Ì’†g
 		//DrawFormatString(20, 120, color, "XMove %f ", cos(planetAngle));
 		//DrawFormatString(20, 140, color, "YMove %f ", sin(planetAngle));
+		//for (int i = 0; i < PLANET_MAX; i++)
+		//{
+		//	planets[i].SetId(i);  // „P„‚„y„ƒ„r„p„y„r„p„u„} „…„~„y„{„p„|„Ž„~„„u ID
+		//	DrawFormatString(20, 50, color, "planet id %d", planets[i]);
+		//}
 	}
 }
 
