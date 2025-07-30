@@ -38,6 +38,7 @@ namespace
 		{18, 11}, {17, 5},{15, 11}
 	};
 	//----------------------------------------------
+
 	Planet planets[PLANET_MAX] = 
 	{
 
@@ -86,10 +87,10 @@ namespace
 	double extraAngles[11];
 
 }
-Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image, int color, int id)
-	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image),color(color),planetId(id) {
 
 	
+Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image, int color, int id)
+	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image), color(GetColor(150, 150, 150)), planetId(id) {
 
 }
 void Planet::Init() 
@@ -177,13 +178,13 @@ void Planet::SetOwner(Owner newOwner)
 	switch (owner) 
 	{
 	case Owner::PLAYER:
-		color = GetColor(255,0,0); // „H„u„|„u„~„„z „t„|„‘ „y„s„‚„€„{„p
+		color = GetColor(255,0,0); // „K„‚„p„ƒ„~„„z „t„|„‘ „y„s„‚„€„{„p
 		break;
 	case Owner::ENEMY:
-		color = GetColor(255, 255, 0);  // „K„‚„p„ƒ„~„„z „t„|„‘ „r„‚„p„s„p
+		color = GetColor(255, 255, 0);  // „G„v„|„„„„z „t„|„‘ „r„‚„p„s„p
 		break;
 	default:
-		color = GetColor(128, 128, 128); // „A„u„|„„z „t„|„‘ „~„u„z„„„‚„p„|„„~„„‡
+		color = GetColor(128, 128, 128); // „R„u„‚„„z „t„|„‘ „~„u„z„„„‚„p„|„„~„„‡
 		break;
 	}
 	DrawCircle(x+PLANET_CENTER, y+PLANET_CENTER, 35, color, FALSE,5.0f);
