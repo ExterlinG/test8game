@@ -10,8 +10,8 @@ public:
     //static const VectorI2 defaultPos[PLANET_MAX];
     //Planet planets[PLANET_MAX];
     
-    Planet(float x, float y, float radius, Owner owner, int resources, int image,int color, int id);
-    Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1), color(GetColor(150, 150, 150)), planetId(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
+    Planet(float x, float y, float radius, Owner owner, int resources, int image, int id);
+    Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1),  planetId(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
     //void Render() const;
     void Init();
     void Update();

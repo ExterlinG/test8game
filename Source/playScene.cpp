@@ -113,25 +113,25 @@ namespace {
 Planet planets[PLANET_MAX] =
 {
 
-		Planet(689,128, PLANET_CENTER, Planet::Owner::PLAYER, 200, -1,planets->color,-1),
-		Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1456, 428, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,planets->color,-1),
-		Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(848.5, 911, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,planets->color,-1),
-		Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
-		Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,planets->color,-1),
+		Planet(689,128, PLANET_CENTER, Planet::Owner::PLAYER, 200, -1,-1),
+		Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1456, 428, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,-1),
+		Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(848.5, 911, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,-1),
+		Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
 
 
 };
@@ -193,7 +193,7 @@ void PlaySceneInit()
 			Planet::Owner::NEUTRAL,
 			200,
 			groundImage,
-			color,
+			
 			planets[i].planetId
 		);
 	}
@@ -261,19 +261,23 @@ void PlaySceneDraw()
 	printf("„O„„„|„p„t„{„p:\n");
 	for (int i = 0; i < PLANET_MAX; i++)
 	{
-		planets[i].Draw();
+		
 		if (i == 0)
 		{
 			planets[i].SetOwner(Planet::Owner::PLAYER);
+			planets[i].Draw();
 		}
 		else if (i == 6)
 		{
 			planets[i].SetOwner(Planet::Owner::ENEMY);
+			planets[i].Draw();
 		}
 		else
 		{
 			planets[i].SetOwner(Planet::Owner::NEUTRAL);
+			planets[i].Draw();
 		}
+		
 		//DrawCircle(static_cast<int>(planets[i].x + PLANET_CENTER), static_cast<int>(planets[i].y + PLANET_CENTER),35,GetColor(2, 194, 240),FALSE, 5.0f);
 			//printf("„P„|„p„~„u„„„p %d: x=%.1f, y=%.1f, image=%d\n",
 			//	i, planets[i].x, planets[i].y, planets[i].groundImage);
