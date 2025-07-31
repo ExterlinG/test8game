@@ -13,7 +13,7 @@ public:
     Owner owner;
     int resources;
     int groundImage;
-    int color;
+    //int color;
     int planetId;
     Planet(float x, float y, float radius, Owner owner, int resources, int image, int id);
     Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1), color(GetColor(128, 128, 128)),planetId(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
@@ -37,7 +37,9 @@ public:
     //int GetColor(int r, int g, int b) const { return color; }
     int GetColor(int r, int g, int b) const { return color; }
 
-//private:
-
+private:
+    //float x, y, radius;
+    //Owner owner;
+    int color;
     };
 
