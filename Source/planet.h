@@ -9,9 +9,14 @@ public:
 	static const int PLANET_CENTER = 48; // „Q„p„t„y„…„ƒ „„|„p„~„u„„„
     //static const VectorI2 defaultPos[PLANET_MAX];
     //Planet planets[PLANET_MAX];
-    
+    float x, y, radius;
+    Owner owner;
+    int resources;
+    int groundImage;
+    int color;
+    int planetId;
     Planet(float x, float y, float radius, Owner owner, int resources, int image, int id);
-    Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1),  planetId(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
+    Planet() : x(0), y(0), radius(0), owner(Owner::NEUTRAL), resources(0), groundImage(-1), color(GetColor(128, 128, 128)),planetId(-1) {} // „D„€„q„p„r„|„u„~ „{„€„~„ƒ„„„‚„…„{„„„€„‚ „„€ „…„}„€„|„‰„p„~„y„
     //void Render() const;
     void Init();
     void Update();
@@ -33,11 +38,6 @@ public:
     int GetColor(int r, int g, int b) const { return color; }
 
 //private:
-    float x, y, radius;
-    Owner owner;
-    int resources;
-    int groundImage;
-    int color;
-    int planetId;
+
     };
 

@@ -190,7 +190,7 @@ void PlaySceneInit()
 			defaultPos[i].x,
 			defaultPos[i].y,
 			PLANET_CENTER,
-			Planet::Owner::NEUTRAL,
+			planets[i].owner,
 			200,
 			groundImage,
 			
@@ -266,16 +266,19 @@ void PlaySceneDraw()
 		{
 			planets[i].SetOwner(Planet::Owner::PLAYER);
 			planets[i].Draw();
+			DrawFormatString(20, 50, 0xFFFFFF, "planet owner = %d", planets[i].owner);
 		}
 		else if (i == 6)
 		{
 			planets[i].SetOwner(Planet::Owner::ENEMY);
 			planets[i].Draw();
+			DrawFormatString(20, 70, 0xFFFFFF, "planet owner = %d", planets[i].owner);
 		}
 		else
 		{
 			planets[i].SetOwner(Planet::Owner::NEUTRAL);
 			planets[i].Draw();
+			DrawFormatString(20, 90, 0xFFFFFF, "planet owner = %d", planets[i].owner);
 		}
 		
 		//DrawCircle(static_cast<int>(planets[i].x + PLANET_CENTER), static_cast<int>(planets[i].y + PLANET_CENTER),35,GetColor(2, 194, 240),FALSE, 5.0f);
@@ -375,7 +378,7 @@ void PlaySceneDraw()
 	if (DEBUG_FONT) {
 		DrawFormatString(20, 30, color, "EnemyStatus");
 		
-		//DrawFormatString(20, 50, color, "PosX %f, PosY %f ", enemyPosX, enemyPosY);
+		//DrawFormatString(20, 50, (255,255,255), "%d", color);
 
 		//Angleは角度ではなく、ラジアン（1.57＝90度）で表現される
 		//75行目の中身
