@@ -135,6 +135,8 @@ void Planet::Draw()
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 80;
 	DrawRectGraph(x, y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
+	DrawCircle(x + PLANET_CENTER, y + PLANET_CENTER, 35, color, FALSE, 5.0f);
+	DrawFormatString(20, 110, 0xFFFFFF, "planet color = %d", color);
 	//for (int i = 0; i < planet_size; i++)
 
 	//{
@@ -190,7 +192,7 @@ void Planet::SetOwner(Owner newOwner)
 		color = GetColor(128, 128, 128); // „R„u„‚„„z „t„|„‘ „~„u„z„„„‚„p„|„Ž„~„„‡
 		break;
 	}
-	DrawCircle(x + PLANET_CENTER, y + PLANET_CENTER, 35, color, FALSE, 5.0f);
+
 }
 
 void Planet::CalculatePlanetAngles(double planetAngle[]) {  // first lines „|„y„~„y„y „ƒ„r„‘„x„„r„p„„‹„y„u „„|„p„~„u„„„ „„€„ƒ„|„u„t„€„r„p„„„u„|„Ž„~„€

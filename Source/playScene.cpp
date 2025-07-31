@@ -264,20 +264,23 @@ void PlaySceneDraw()
 		
 		if (i == 0)
 		{
-			planets[i].SetOwner(Planet::Owner::PLAYER);
+			
 			planets[i].Draw();
+			planets[i].SetOwner(Planet::Owner::PLAYER);
 			DrawFormatString(20, 50, 0xFFFFFF, "planet owner = %d", planets[i].owner);
 		}
 		else if (i == 6)
 		{
-			planets[i].SetOwner(Planet::Owner::ENEMY);
+			
 			planets[i].Draw();
+			planets[i].SetOwner(Planet::Owner::ENEMY);
 			DrawFormatString(20, 70, 0xFFFFFF, "planet owner = %d", planets[i].owner);
 		}
 		else
 		{
-			planets[i].SetOwner(Planet::Owner::NEUTRAL);
+			
 			planets[i].Draw();
+			planets[i].SetOwner(Planet::Owner::NEUTRAL);
 			DrawFormatString(20, 90, 0xFFFFFF, "planet owner = %d", planets[i].owner);
 		}
 		
