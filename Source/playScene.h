@@ -1,5 +1,12 @@
 #pragma once
 
+#include "planet.h"
+#include "ship.h"
+#include "player.h"
+#include <vector>
+
+
+
 void PlaySceneInit();
 void PlaySceneUpdate();
 void PlaySceneDraw();

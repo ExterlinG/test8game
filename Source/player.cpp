@@ -3,10 +3,11 @@
 #include "config.h"
 #include "struct.h"
 #include "player.h"
-
+#include "math.h"
 
 namespace
 {
+
 	static const int COLLISION_SIZE = 36;
 	int humanShipImage = -1;
 	Vector2 pos;		//planetÉèÉMÉÉÉìÇÃç¿ïW
@@ -36,7 +37,8 @@ void PlayerInit()
 	PlayerReset();
 }
 //--------------------------------------------------------------------------------
-void Player::Update(std::vector<Planet>& planets, std::vector<Ship>& ships) {
+//playScene
+void Player::Update(std::vector<Planet>& planets/*, std::vector<Ship>& ships*/) {
 	if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 		int mouseX, mouseY;
 		GetMousePoint(&mouseX, &mouseY);
@@ -54,6 +56,26 @@ void Player::Update(std::vector<Planet>& planets, std::vector<Ship>& ships) {
 				break;
 			}
 		}
+	}
+}
+
+void Player::SendShips(Planet& from, Planet& to, std::vector<Ship>& ships) 
+{
+	if (from.GetOwner() == Planet::Owner::PLAYER && from.GetUnits() > 0) 
+	{
+		int shipsToSend = from.GetUnits() / 2;
+		if (shipsToSend < 1) shipsToSend = 1;
+
+		for (int i = 0; i < shipsToSend; ++i) 
+		{
+			float angle = atan2(to.GetY() - from.GetY(), to.GetX() - from.GetX());
+			float offset = (rand() % 20 - 10) * 0.1f;
+			float spawnX = from.GetX() + cos(angle + offset) * from.GetRadius();
+			float spawnY = from.GetY() + sin(angle + offset) * from.GetRadius();
+
+			ships.emplace_back(spawnX, spawnY, &to, Planet::Owner::PLAYER);
+		}
+		from.RemoveUnits(shipsToSend);
 	}
 }
 
@@ -87,4 +109,6 @@ void PlayerRelease()
 		DeleteGraph(humanShipImage);
 		humanShipImage = -1;
 	}
+	//ships.clear();
+	//planets.clear();
 }

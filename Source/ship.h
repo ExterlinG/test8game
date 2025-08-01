@@ -3,10 +3,12 @@
 
 class Ship {
 public:
-    Ship(float startX, float startY, Planet* target, Planet::Owner owner, int image);
+    Ship(float x, float y, Planet* target, Planet::Owner owner, int image);
     void Update();
     void Render() const;
-
+    bool HasReachedTarget() const;
+    Planet* GetTargetPlanet() const { return target; }
+    Planet::Owner GetOwner() const { return owner; }
 private:
     float x, y, speed;
     Planet* target;

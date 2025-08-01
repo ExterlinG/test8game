@@ -7,8 +7,8 @@
 class Player {
 public:
     void Initialize();
-    void Update(std::vector<Planet>& planets, std::vector<Ship>& ships);
-
+    void Update(std::vector<Planet>& planets/*, std::vector<Ship>& ships*/);
+    void SendShips(Planet& from, Planet& to, std::vector<Ship>& ships);
 private:
     int selectedPlanetId = -1;
 };

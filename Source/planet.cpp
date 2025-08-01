@@ -89,10 +89,10 @@ namespace
 }
 
 	
-Planet::Planet(float x, float y, float radius, Owner owner, int resources, int image,  int id)
-	: x(x), y(y), radius(radius), owner(owner), resources(resources), groundImage(image), color(GetColor(150, 150, 150)),planetId(id) 
+Planet::Planet(float x, float y, float radius,int units, Owner owner, int resources, int image,  int id)
+	: x(x), y(y), radius(radius), units(units), owner(owner), resources(resources), groundImage(image), color(GetColor(150, 150, 150)),planetId(id)
 {
-	SetOwner(owner);
+	//SetOwner(owner);
 }
 void Planet::Init() 
 {
@@ -118,7 +118,16 @@ void Planet::Init()
 }
 void Planet::Update() 
 {
-
+	//playScene
+	if (owner != Owner::NEUTRAL)
+	{
+		if (units >= 50)
+		{
+			units == 50;
+		}
+		units++;
+	}
+	//-----------------------------------------------
 
 	// Update logic for the planet can be added here
 	walkCounter++;
@@ -131,11 +140,29 @@ void Planet::Update()
 
 void Planet::Draw()
 {
+	//playScene
+	int color;
+	switch (owner)
+	{
+	case Owner::PLAYER:
+		color = GetColor(255, 0, 0); // „K„‚„p„ƒ„~„„z „t„|„‘ „y„s„‚„€„{„p
+		break;
+	case Owner::ENEMY:
+		color = GetColor(255, 255, 0);  // „G„v„|„„„„z „t„|„‘ „r„‚„p„s„p
+		break;
+	default:
+		color = GetColor(128, 128, 128); // „R„u„‚„„z „t„|„‘ „~„u„z„„„‚„p„|„„~„„‡
+		break;
+	}
+
+	//--------------------------------------------------
+	
 	//planet position
 	const int LINE_SPRITE_WIDTH = 16;
 	const int LINE_SPRITE_HEIGHT = 80;
 	DrawRectGraph(x, y, patternPlanet * 96, 0, 96, 96, groundImage, true, false);
 	DrawCircle(x + PLANET_CENTER, y + PLANET_CENTER, 35, color, FALSE, 5.0f);
+	DrawFormatString(x - 10, y - 10, GetColor(255, 255, 255), "%d", units);
 	DrawFormatString(20, 110, 0xFFFFFF, "planet color = %d", color);
 	//for (int i = 0; i < planet_size; i++)
 
@@ -176,7 +203,35 @@ void Planet::Release()
 		lines = -1;
 	}
 }
+//playScene
+void Planet::RenderSelection() const 
+{
+	DrawCircle(x, y, radius + 5, GetColor(255, 255, 0), FALSE);
+}
 
+bool Planet::Contains(int mouseX, int mouseY) const {
+	float dx = mouseX - x;
+	float dy = mouseY - y;
+	return (dx * dx + dy * dy) <= (radius * radius);
+}
+bool Planet::TryCapture(int attackingShips, Owner newOwner) {
+	if (owner == Owner::NEUTRAL) {
+		owner = newOwner;
+		units = attackingShips;
+		return true;
+	}
+
+	if (attackingShips > units) {
+		owner = newOwner;
+		units = attackingShips - units;
+		return true;
+	}
+
+	units -= attackingShips;
+	return false;
+}
+
+//--------------------------------------------------
 void Planet::SetOwner(Owner newOwner) 
 {
     owner = newOwner;
@@ -192,7 +247,7 @@ void Planet::SetOwner(Owner newOwner)
 		color = GetColor(128, 128, 128); // „R„u„‚„„z „t„|„‘ „~„u„z„„„‚„p„|„„~„„‡
 		break;
 	}
-
+	DrawFormatString(20, 130, 0xFFFFFF, "Planet %d: owner=%d, color=%d\n", planetId, (int)owner, color);
 }
 
 void Planet::CalculatePlanetAngles(double planetAngle[]) {  // first lines „|„y„~„y„y „ƒ„r„‘„x„„r„p„„‹„y„u „„|„p„~„u„„„ „„€„ƒ„|„u„t„€„r„p„„„u„|„„~„€

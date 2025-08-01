@@ -7,10 +7,18 @@
 #include "math.h"
 #include <vector>
 #include "planet.h"
+#include "ship.h"
 
 static const float PLANET_CENTER = 48.0;
 
 namespace {
+	//PlayScene names
+	Player player;
+	std::vector<Planet> planets;
+	std::vector<Ship> ships;
+	int selectedPlanetIndex = -1;
+	int targetPlanetIndex = -1;
+	//-----------------------------------------------------------
 	Planet planetFunction;
 	enum class PlayStatus {
 		BEFORE_PLAY,
@@ -110,33 +118,52 @@ namespace {
 	int color;
 	static const bool DEBUG_FONT = true;
 };
-Planet planets[PLANET_MAX] =
+Planet planetsPos[PLANET_MAX] =
 {
 
-		Planet(689,128, PLANET_CENTER, Planet::Owner::PLAYER, 200, -1,-1),
-		Planet(848, 96, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1008, 128, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1136, 224, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1192, 368, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1096, 509, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1456, 428, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,-1),
-		Planet(1408, 592, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1280, 720, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(1104, 768, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(944, 704, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(848, 560, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(848.5, 911, PLANET_CENTER, Planet::Owner::ENEMY, 200, -1,-1),
-		Planet(704, 800, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(624, 640, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(655, 464, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(785, 352, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(960, 336, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
-		Planet(960,476, PLANET_CENTER, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(689,128, PLANET_CENTER,0, Planet::Owner::PLAYER, 200, -1,-1),
+		Planet(848, 96, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1008, 128, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1136, 224, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1192, 368, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1096, 509, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1456, 428, PLANET_CENTER,0, Planet::Owner::ENEMY, 200, -1,-1),
+		Planet(1408, 592, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1280, 720, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(1104, 768, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(944, 704, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(848, 560, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(848.5, 911, PLANET_CENTER,0, Planet::Owner::ENEMY, 200, -1,-1),
+		Planet(704, 800, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(624, 640, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(655, 464, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(785, 352, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(960, 336, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
+		Planet(960,476, PLANET_CENTER,0, Planet::Owner::NEUTRAL, 200, -1,-1),
 
 
 };
 
+//PlayScene
+void SpawnShips(Planet& from, Planet& to) {
+	if (from.GetOwner() == Planet::Owner::PLAYER && from.GetUnits() > 0) {
+		int shipsToSend = from.GetUnits() / 2;
+		if (shipsToSend < 1) shipsToSend = 1;
 
+		for (int i = 0; i < shipsToSend; i++) {
+			float angle = atan2(to.GetY() - from.GetY(), to.GetX() - from.GetX());
+			float offset = (rand() % 20 - 10) * 0.1f;
+			float spawnX = from.GetX() + cos(angle + offset) * from.GetRadius();
+			float spawnY = from.GetY() + sin(angle + offset) * from.GetRadius();
+
+			ships.emplace_back(spawnX, spawnY, &to, from.GetOwner());
+		}
+
+		from.RemoveUnits(shipsToSend);
+	}
+}
+
+//----------------------------------------------
 void PlaySceneInit()
 {
 
@@ -186,18 +213,30 @@ void PlaySceneInit()
 	CalculateExtraAngles(extraAngles);
 	for (int i = 0; i < PLANET_MAX; i++)
 	{
-		planets[i] = Planet(
+		planetsPos[i].SetOwner(planets[i].owner);
+		planetsPos[i] = Planet(
 			defaultPos[i].x,
 			defaultPos[i].y,
 			PLANET_CENTER,
+			0, 
 			planets[i].owner,
+			
 			200,
 			groundImage,
-			
+		
 			planets[i].planetId
 		);
-	}
+		
+		planetsPos[i].Draw();
+		DrawFormatString(20, 130, 0xFFFFFF, "Planet %d: color=%d\n", planets[i].planetId, planets[i].color);
 
+	}
+	for (int i = 0; i < PLANET_MAX; i++)
+	{
+		Planet::Owner newOwner = planetsPos[i].owner;
+		planetsPos[i].SetOwner(newOwner); // „C„t„u newOwner - „~„€„r„„z „r„|„p„t„u„|„u„ˆ (PLAYER/ENEMY/NEUTRAL)
+		planetsPos[i].Draw(); // „P„u„‚„u„‚„y„ƒ„€„r„„r„p„u„} „ƒ „~„€„r„„} „ˆ„r„u„„„€„}
+	}
 	//planets[0].SetOwner(Planet::Owner::PLAYER);
 
 	//debug
@@ -212,6 +251,83 @@ void PlaySceneUpdate()
 	//walkCounter++;
 	lineWalkCounter++;
 	patternLine = (lineWalkCounter / 10) % 10;
+
+	//playScene
+		// „O„q„~„€„r„|„u„~„y„u „y„s„‚„€„{„p
+	player.Update(planets);
+
+	
+	player.Update(planets);
+
+	// „B„„q„€„‚ „„|„p„~„u„„„
+	if (CheckHitKey(MOUSE_INPUT_LEFT)) {
+		int mouseX, mouseY;
+		GetMousePoint(&mouseX, &mouseY);
+
+		for (size_t i = 0; i < planets.size(); ++i) {
+			if (planets[i].Contains(mouseX, mouseY)) {
+				if (selectedPlanetIndex == -1) {
+					selectedPlanetIndex = i;
+				}
+				else if (selectedPlanetIndex != i) {
+					player.SendShips(planets[selectedPlanetIndex], planets[i], ships);
+					selectedPlanetIndex = -1;
+				}
+				break;
+			}
+		}
+	}
+
+	// „O„q„~„€„r„|„u„~„y„u „„|„p„~„u„„
+	for (auto& planet : planets) {
+		planet.Update();
+	}
+
+	// „O„q„~„€„r„|„u„~„y„u „{„€„‚„p„q„|„u„z „y „€„q„‚„p„q„€„„„{„p „ƒ„„„€„|„{„~„€„r„u„~„y„z
+	std::vector<Planet*> planetsToUpdate;
+
+	for (auto it = ships.begin(); it != ships.end(); ) {
+		it->Update();
+
+		if (it->HasReachedTarget()) {
+			Planet* target = it->GetTargetPlanet();
+			if (target) {
+				planetsToUpdate.push_back(target);
+			}
+			it = ships.erase(it);
+		}
+		else {
+			++it;
+		}
+	}
+
+	// „O„q„‚„p„q„€„„„{„p „x„p„‡„r„p„„„p „„|„p„~„u„„
+	for (auto* planet : planetsToUpdate) {
+		int playerShips = 0;
+		int enemyShips = 0;
+
+		for (auto& ship : ships) {
+			if (ship.HasReachedTarget() && ship.GetTargetPlanet() == planet) {
+				if (ship.GetOwner() == Planet::Owner::PLAYER) playerShips++;
+				else enemyShips++;
+			}
+		}
+
+		if (playerShips > 0) {
+			planet->TryCapture(playerShips, Planet::Owner::PLAYER);
+		}
+		if (enemyShips > 0) {
+			planet->TryCapture(enemyShips, Planet::Owner::ENEMY);
+		}
+	}
+}
+
+
+
+	//-----------------------------------------------------------
+
+
+
 
 	//if (lineWalkCounter > 60)
 	//{
@@ -241,10 +357,15 @@ void PlaySceneUpdate()
 	//enemyPosX = cos(planetAngle);
 	//enemyPosY = sin(planetAngle);
 
-}
+
 
 void PlaySceneDraw()
 {
+	
+	
+	
+	
+	
 	//for (int i = 0; i < PLANET_MAX; i++) {
 	//	planetFunction.Draw(); // „O„„„‚„y„ƒ„€„r„„r„p„u„} „„|„p„~„u„„„ „y„x planet.cpp
 	//}
@@ -291,6 +412,29 @@ void PlaySceneDraw()
 
 
 	}
+	//playScene
+	// „O„„„‚„y„ƒ„€„r„{„p „„|„p„~„u„„
+	for (const auto& planet : planets) 
+	{
+		planet.RenderSelection();
+	}
+	// „O„„„‚„y„ƒ„€„r„{„p „{„€„‚„p„q„|„u„z
+	for (const auto& ship : ships) 
+	{
+		ship.Render();
+	}
+	// „O„„„‚„y„ƒ„€„r„{„p „r„„t„u„|„u„~„y„‘
+	if (selectedPlanetIndex >= 0) 
+	{
+		planets[selectedPlanetIndex].RenderSelection();
+	}
+	// „O„„„‚„y„ƒ„€„r„{„p UI „y„s„‚„€„{„p
+	//player.();
+
+
+
+	//----------------------------
+
 	//line
 	//planetFunction.DrawLines(planetAngle);
  //
@@ -375,6 +519,8 @@ void PlaySceneDraw()
 		//DrawRotaGraph2(848, 128, linePos.x*16, 112, 1, planetAngle, lines, true, false);
 		//DrawRectRotaGraph(enemyPosX, enemyPosY, linePos.x*16, 112,80,16, 1, planetAngle, lines, true, false);//lines rotated
 		//DrawRectRotaGraph2(848+48, 96+48, linePos.x * 16, 112, 80, 16, 0, 0, 1, planetAngle, lines, true, false);//lines rotated
+	
+	
 	PlayerDraw();
 
 
